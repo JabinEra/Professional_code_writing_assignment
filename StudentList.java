@@ -23,6 +23,8 @@ public class StudentList {
 			findEntry(fileContents,args[0].substring(1));
 		} else if (args[0].contains(Constants.ShowCount)) {
 			showWordCount(fileContents);
+		}else{
+			System.out.println(Constants.InvalidArgument + args[0]);
 		}
 		System.out.println(Constants.DataLoadedText);
 	}
