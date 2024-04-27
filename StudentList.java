@@ -20,15 +20,10 @@ public class StudentList {
 			}
 		} else if (args[0].equals(Constants.ShowRandom)) {
 			String words[] = fileContents.split(Constants.StudentEntryDelimiter);
-			Random randomGenerator = new Random();
-			int randomNumber = randomGenerator.nextInt(words.length);
+			int randomNumber = new Random().nextInt(words.length);
 			System.out.println(words[randomNumber]);
 		} else if (args[0].contains(Constants.AddEntry)) {
-			String word = args[0].substring(1);
-			Date date = new Date();
-			DateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
-			String finalDate = dateFormat.format(date);
-			writeToFile(Constants.FILE_NAME,finalDate,word);
+			writeToFile(Constants.FILE_NAME,new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date()),args[0].substring(1));
 		} else if (args[0].contains(Constants.FindEntry)) {
 			String words[] = fileContents.split(Constants.StudentEntryDelimiter);
 			boolean done = false;
@@ -70,10 +65,9 @@ public class StudentList {
 	}
 
 	public static void writeToFile(String filename, String finalDate, String word) {
-			String data = ", " + word + "\nList last updated on " + finalDate;
 		try {
 			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename, true));
-			bufferedWriter.write(data);
+			bufferedWriter.write(", " + word + "\nList last updated on " + finalDate);
 			bufferedWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
