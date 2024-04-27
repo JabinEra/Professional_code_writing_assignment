@@ -27,20 +27,8 @@ public class StudentList {
 		System.out.println(Constants.DataLoadedText);
 	}
 	public static void showWordCount(String fileContents) {
-		char charArray[] = fileContents.toCharArray();
-		boolean in_word = false;
-		int count = 0;
-		for (char character : charArray) {
-			if (character == Constants.Space) {
-				if (!in_word) {
-					count++;
-					in_word = true;
-				} else {
-					in_word = false;
-				}
-			}
-		}
-		System.out.println(count + Constants.WordsFound);
+		String[] words = fileContents.split(Constants.StudentEntryDelimiter);
+		System.out.println(words.length + Constants.WordsFound);
 	}
 	public static void findEntry(String fileContents, String word) {
 		String words[] = fileContents.split(Constants.StudentEntryDelimiter);
