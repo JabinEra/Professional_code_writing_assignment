@@ -11,5 +11,6 @@ public class Constants {
     public static final String DataLoadedText = "Data Loaded.";
     public static final String FoundText = "We found it!";
     public static final String WordsFound = " word(s) found ";
+    public static final String InvalidArgument = "Invalid argument: ";
     public static final char Space = ' ';
 }
