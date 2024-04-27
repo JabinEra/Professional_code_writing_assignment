@@ -10,17 +10,17 @@ public class StudentList {
 			System.out.println("Usage: (a | r | c | +WORD | ?WORD)");
 			return; //Exit early.
 		}
-
+		//Process file contents
 		String fileContents = readFileContents(Constants.FILE_NAME);
-
+		// Process user input
 		if (args[0].equals(Constants.ShowAll)) {
-			showAll(fileContents);
+			showAllStudents(fileContents);
 		} else if (args[0].equals(Constants.ShowRandom)) {
-			showRandom(fileContents);
+			showRandomStudent(fileContents);
 		} else if (args[0].contains(Constants.AddEntry)) {
-			addEntry(Constants.FILE_NAME,args[0].substring(1));
+			addEntryToFile(Constants.FILE_NAME,args[0].substring(1));
 		} else if (args[0].contains(Constants.FindEntry)) {
-			findEntry(fileContents,args[0].substring(1));
+			findEntryInFile(fileContents,args[0].substring(1));
 		} else if (args[0].contains(Constants.ShowCount)) {
 			showWordCount(fileContents);
 		}else{
@@ -28,11 +28,13 @@ public class StudentList {
 		}
 		System.out.println(Constants.DataLoadedText);
 	}
+	// Method to display the word count
 	public static void showWordCount(String fileContents) {
 		String[] words = fileContents.split(Constants.StudentEntryDelimiter);
 		System.out.println(words.length + Constants.WordsFound);
 	}
-	public static void findEntry(String fileContents, String word) {
+	// Method to find and display an entry in the file
+	public static void findEntryInFile(String fileContents, String word) {
 		String words[] = fileContents.split(Constants.StudentEntryDelimiter);
 		boolean found = false;
 		for (String w : words) {
@@ -46,11 +48,12 @@ public class StudentList {
 			System.out.println("Word not found.");
 		}
 	}
-	public static void addEntry(String filename, String word) {
+	// Method to add an entry to the file
+	public static void addEntryToFile(String filename, String word) {
 		writeToFile(filename, new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date()), word);
 	}
-
-	public static void showRandom(String fileContents) {
+	// Method to display a random entry from the file
+	public static void showRandomStudent(String fileContents) {
 		String words[] = fileContents.split(Constants.StudentEntryDelimiter);
 		if (words.length > 0) {
 			int randomNumber = new Random().nextInt(words.length);
@@ -59,12 +62,14 @@ public class StudentList {
 			System.out.println("No words found.");
 		}
 	}
-	public static void showAll(String fileContents) {
+	// Method to display all entries in the file
+	public static void showAllStudents(String fileContents) {
 		String words[] = fileContents.split(Constants.StudentEntryDelimiter);
 		for (String word : words) {
 			System.out.println(word);
 		}
 	}
+	// Method to read file contents
 	public static String readFileContents(String filename) {
 		System.out.println(Constants.LoadingDataText);
 		try {
@@ -76,7 +81,7 @@ public class StudentList {
 			return null;
 		}
 	}
-
+	// Method to write to the file
 	public static void writeToFile(String filename, String finalDate, String word) {
 		try {
 			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename, true));
